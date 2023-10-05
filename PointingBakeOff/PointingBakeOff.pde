@@ -21,8 +21,8 @@ Robot robot; //initialized in setup
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
-SoundFile soundHit;
-SoundFile soundMiss;
+SoundFile soundHit; // storing sound for clicking correct square 
+SoundFile soundMiss; // storing sound for worng square clicked
 
 void setup()
 {
