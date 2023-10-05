@@ -21,8 +21,9 @@ Robot robot; //initialized in setup
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
-SoundFile soundHit; // storing sound for clicking correct square 
-SoundFile soundMiss; // storing sound for worng square clicked
+SoundFile soundHit;
+SoundFile soundMiss;
+PImage customCursor;
 
 void setup()
 {
@@ -35,6 +36,9 @@ void setup()
   ellipseMode(CENTER); //ellipses are drawn from the center (BUT RECTANGLES ARE NOT!)
   //rectMode(CENTER); //enabling will break the scaffold code, but you might find it easier to work with centered rects
 
+  customCursor = loadImage("cursor.png");
+  cursor(customCursor, 1,1);
+  
   try {
     robot = new Robot(); //create a "Java Robot" class that can move the system cursor
   } 
@@ -56,6 +60,7 @@ void setup()
   
   soundHit = new SoundFile(this, "correctSquare.wav");
   soundMiss = new SoundFile(this, "wrongSquare.wav");
+  
 }
 
 
@@ -86,7 +91,8 @@ void draw()
     drawButton(i); //draw button
 
   fill(255, 0, 0, 200); // set fill color to translucent red
-  ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+  //cursor(HAND);
+  //ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
 }
 
 void mousePressed() // test to see if hit was in target!
@@ -112,6 +118,7 @@ void mousePressed() // test to see if hit was in target!
     System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
     hits++; 
     soundHit.play(); // sound clip for clicking the correct square
+    
   } 
   else
   {
@@ -121,7 +128,7 @@ void mousePressed() // test to see if hit was in target!
   }
 
   trialNum++; //Increment trial number
-
+  
   //in this example code, we move the mouse back to the middle
   //robot.mouseMove(width/2, (height)/2); //on click, move cursor to roughly center of window!
 }  
@@ -140,14 +147,15 @@ void drawButton(int i)
   Rectangle bounds = getButtonLocation(i);
 
   if (trials.get(trialNum) == i) // see if current button is the target
-    fill(255, 0, 0); // if so, fill cyan
+    fill(255, 0, 0); // if so, fill red
   else
-    fill(200); // if not, fill gray
+    fill(200, 60); // if not, fill gray
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
 }
 
 void mouseMoved()
 {
+  //cursor(ARROW);
    //can do stuff everytime the mouse is moved (i.e., not clicked)
    //https://processing.org/reference/mouseMoved_.html
 }
