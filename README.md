@@ -10,3 +10,9 @@
 6. Shrink cursor when it hovers over the highlighted square.
 7. Play sound feedback when a square is highlighted.
 8. Play sound feedback on hit/ miss.
+
+
+### Prototype 1:
+
+    Ideas implemented: 1-5
+    Ideas rejected: 6, 7, 8
