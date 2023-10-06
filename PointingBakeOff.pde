@@ -55,7 +55,8 @@ void setup()
 void draw()
 {
   background(0); //set background to black
-
+  noCursor();
+  
   if (trialNum >= trials.size()) //check to see if test is over
   {
     float timeTaken = (finishTime-startTime) / 1000f;
@@ -78,8 +79,8 @@ void draw()
   for (int i = 0; i < 16; i++)// for all button
     drawButton(i); //draw button
 
-  fill(255, 0, 0, 200); // set fill color to translucent red
-  ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+  //fill(0, 255, 255); // Make cursor Cyan
+  //ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
 }
 
 void mousePressed() // test to see if hit was in target!
@@ -129,13 +130,13 @@ Rectangle getButtonLocation(int i) //for a given button ID, what is its location
 void drawButton(int i)
 {
   Rectangle bounds = getButtonLocation(i);
-
   if (trials.get(trialNum) == i) // see if current button is the target
-    fill(0, 255, 255); // if so, fill cyan
+    fill(255, 0, 0); // Make the highlighted square red
   else
-    fill(200); // if not, fill gray
+    fill(200, 40); // Make the un-highlighted squares Opaque at 40%
 
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+  
 }
 
 void mouseMoved()
