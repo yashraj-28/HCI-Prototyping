@@ -95,6 +95,10 @@ void draw()
   {
     fill(0, 255, 255); // Make cursor Cyan
     ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+    
+    stroke(255, 255, 255);
+    line(mouseX, mouseY, bounds.x + buttonSize/2, bounds.y + buttonSize/2);
+    stroke(0, 0, 0);
   }
   
   t += 0.3; // This controls the speed of flashing, higher value = faster
