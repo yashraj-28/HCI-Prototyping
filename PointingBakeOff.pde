@@ -17,6 +17,7 @@ int finishTime = 0; //records the time of the final click
 int hits = 0; //number of successful clicks
 int misses = 0; //number of missed clicks
 Robot robot; //initialized in setup 
+float t = 0;
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
@@ -30,7 +31,7 @@ void setup()
   frameRate(60);
   ellipseMode(CENTER); //ellipses are drawn from the center (BUT RECTANGLES ARE NOT!)
   //rectMode(CENTER); //enabling will break the scaffold code, but you might find it easier to work with centered rects
-
+  
   try {
     robot = new Robot(); //create a "Java Robot" class that can move the system cursor
   } 
@@ -81,6 +82,22 @@ void draw()
 
   //fill(0, 255, 255); // Make cursor Cyan
   //ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+  
+  Rectangle bounds = getButtonLocation(trials.get(trialNum));
+  
+  //check to see if mouse cursor is inside button 
+  if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
+  {
+    fill(0, 255, 255); // Make cursor Cyan
+    ellipse(mouseX, mouseY, 10, 10); //draw user cursor as a circle with a diameter of 10
+  } 
+  else
+  {
+    fill(0, 255, 255); // Make cursor Cyan
+    ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+  }
+  
+  t += 0.3; // This controls the speed of flashing, higher value = faster
 }
 
 void mousePressed() // test to see if hit was in target!
@@ -131,18 +148,28 @@ void drawButton(int i)
 {
   Rectangle bounds = getButtonLocation(i);
   if (trials.get(trialNum) == i) // see if current button is the target
-    fill(255, 0, 0); // Make the highlighted square red
+  {
+    float redIntensity = (sin(t) + 1) * 0.5; // This will range from 0 to 1
+    if (redIntensity > 0.5) {
+      fill(255, 0, 0); // Red
+    } else {
+      fill(220, 220, 220); // slightly off White
+    }
+  }
   else
+  {
     fill(200, 40); // Make the un-highlighted squares Opaque at 40%
+  }
 
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
-  
 }
+
 
 void mouseMoved()
 {
    //can do stuff everytime the mouse is moved (i.e., not clicked)
    //https://processing.org/reference/mouseMoved_.html
+   
 }
 
 void mouseDragged()
