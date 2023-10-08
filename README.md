@@ -14,5 +14,30 @@
 
 ### Prototype 1:
 
-    Ideas implemented: 1-6
-    Ideas rejected: 7, 8
+    Ideas implemented: 1-5
+    Ideas rejected: 6, 7, 8
+
+
+### First Refinement:
+- Modifications for better contrast
+    - Make the cursor bright green instead of Cyan. 
+    - Remove the black stroke around cursor.
+    - Increase stroke weight.
+- Keep all the other ideas.
+
+
+### Prototype 2 (New ideas):
+1. Make workspace full screen.
+2. Decrease the sensitivity of mouse.
+
+### Final Prototype:
+- Revert the sensitivity to default.
+- Keep all the other ideas:
+    1. Remove mouse pointer, make cursor color Green.
+    2. Reduce cursor size when it hovers over highlighted square.
+    3. Flash square (with colors red and white) on highlight. 
+    4. Dim un-highlighted squares slightly.
+    5. Include shortest path line from cursor to center of highlighted square.
+    6. Make workspace fullscreen.
+
+

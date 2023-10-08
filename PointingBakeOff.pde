@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
-int margin = 200; //set the margin around the squares
+int margin = 450; //set the margin around the squares
 final int padding = 50; // padding between buttons and also their width/height
 final int buttonSize = 40; // padding between buttons and also their width/height
 ArrayList<Integer> trials = new ArrayList<Integer>(); //contains the order of buttons that activate in the test
@@ -23,6 +23,7 @@ int numRepeats = 1; //sets the number of times each button repeats in the test
 
 void setup()
 {
+  fullScreen();
   size(700, 700); // set the size of the window
   //noCursor(); //hides the system cursor if you want
   noStroke(); //turn off all strokes, we're just using fills here (can change this if you want)
@@ -88,16 +89,21 @@ void draw()
   //check to see if mouse cursor is inside button 
   if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
   {
-    fill(0, 255, 255); // Make cursor Cyan
+    stroke(10, 255, 10);
+    fill(10, 255, 10); // Make cursor Bright green
     ellipse(mouseX, mouseY, 10, 10); //draw user cursor as a circle with a diameter of 10
+    stroke(0, 0, 0);
   } 
   else
   {
-    fill(0, 255, 255); // Make cursor Cyan
+    stroke(10, 255, 10);
+    fill(10, 255, 10); // Make cursor Bright green
     ellipse(mouseX, mouseY, 22, 22); //draw user cursor as a circle with a diameter of 20
+    stroke(0, 0, 0);
     
+    // When the cursor is outside the square add a stroke
     stroke(255, 255, 255);
-    strokeWeight(2);
+    strokeWeight(3);
     line(mouseX, mouseY, bounds.x + buttonSize/2, bounds.y + buttonSize/2);
     stroke(0, 0, 0);
   }
