@@ -158,12 +158,12 @@ void drawButton(int i)
     if (redIntensity > 0.5) {
       fill(255, 0, 0); // Red
     } else {
-      fill(220, 220, 220); // slightly off White
+      fill(255, 255, 255);
     }
   }
   else
   {
-    fill(200, 40); // Make the un-highlighted squares Opaque at 40%
+    fill(200); 
   }
 
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
