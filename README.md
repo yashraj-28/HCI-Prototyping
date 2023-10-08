@@ -2,6 +2,7 @@
 ### Bakeoff 1: Pointing
 - Developed in [Processing](https://processing.org)
 - [Video explanation]()
+- [Presentation Slides](https://nbviewer.org/github/yashraj-28/HCI-Prototyping/blob/main/Slides.pdf)
   
 ### Initial Ideas:
 
