@@ -14,5 +14,5 @@
 
 ### Prototype 1:
 
-    Ideas implemented: 1-5
-    Ideas rejected: 6, 7, 8
+    Ideas implemented: 1-6
+    Ideas rejected: 7, 8
