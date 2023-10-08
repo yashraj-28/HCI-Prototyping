@@ -93,7 +93,7 @@ void draw()
   } 
   else
   {
-    fill(0, 255, 255); // Make cursor Cyan
+    fill(0, 255, 0); // Make cursor Cyan
     ellipse(mouseX, mouseY, 22, 22); //draw user cursor as a circle with a diameter of 20
     
     stroke(255, 255, 255);

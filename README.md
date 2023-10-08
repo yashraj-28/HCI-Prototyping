@@ -16,3 +16,19 @@
 
     Ideas implemented: 1-5
     Ideas rejected: 6, 7, 8
+
+
+### First Refinement:
+- Modifications for better contrast
+    - Make the cursor bright green instead of Cyan. 
+    - Remove the black stroke around cursor.
+    - Increase stroke weight.
+- Keep all the other ideas.
+
+
+### Prototype 2 (New ideas):
+1. Increase the total screen space with workspace in center.
+2. 
+3. 
+
+
