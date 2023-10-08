@@ -8,18 +8,17 @@
 
 1. Make highlight color Red. 
 2. Flash a square (between Red and White) when highlighted. 
-3. Reduce visibility of un-highlighted squares. 
-4. Draw a line from center of the highlighted square to the cursor.
-5. Remove the mouse and make cursor color Cyan.
-6. Shrink cursor when it hovers over the highlighted square.
-7. Play sound feedback when a square is highlighted.
-8. Play sound feedback on hit/ miss.
+3. Draw a line from center of the highlighted square to the cursor.
+4. Remove the mouse and make cursor color Cyan.
+5. Shrink cursor when it hovers over the highlighted square.
+6. Play sound feedback when a square is highlighted.
+7. Play sound feedback on hit/ miss.
 
 
 ### Prototype 1:
 
     Ideas implemented: 1-5
-    Ideas rejected: 6, 7, 8
+    Ideas rejected: 6, 7
 
 
 ### First Refinement:
@@ -40,8 +39,7 @@
     1. Remove mouse pointer, make cursor color Green.
     2. Reduce cursor size when it hovers over highlighted square.
     3. Flash square (with colors red and white) on highlight. 
-    4. Dim un-highlighted squares slightly.
-    5. Include shortest path line from cursor to center of highlighted square.
-    6. Make workspace fullscreen.
+    4. Include shortest path line from cursor to center of highlighted square.
+    5. Make workspace fullscreen.
 
 
