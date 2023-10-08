@@ -1,4 +1,5 @@
-## Bakeoff 1: Pointing
+## COSC 559: Human Computer Interaction
+### Bakeoff 1: Pointing
 
 ### Initial Ideas:
 
