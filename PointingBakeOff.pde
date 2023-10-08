@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
-int margin = 200; //set the margin around the squares
+int margin = 450; //set the margin around the squares
 final int padding = 50; // padding between buttons and also their width/height
 final int buttonSize = 40; // padding between buttons and also their width/height
 ArrayList<Integer> trials = new ArrayList<Integer>(); //contains the order of buttons that activate in the test
@@ -21,9 +21,12 @@ float t = 0;
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
+float sensitivity = 0.8;
+
 void setup()
 {
-  size(700, 700); // set the size of the window
+  fullScreen();
+  //size(900, 900); // set the size of the window
   //noCursor(); //hides the system cursor if you want
   noStroke(); //turn off all strokes, we're just using fills here (can change this if you want)
   textFont(createFont("Arial", 16)); //sets the font to Arial size 16
@@ -58,6 +61,9 @@ void draw()
   background(0); //set background to black
   noCursor();
   
+  float scaledX = mouseX * sensitivity;
+  float scaledY = mouseY * sensitivity;
+  
   if (trialNum >= trials.size()) //check to see if test is over
   {
     float timeTaken = (finishTime-startTime) / 1000f;
@@ -81,24 +87,29 @@ void draw()
     drawButton(i); //draw button
 
   //fill(0, 255, 255); // Make cursor Cyan
-  //ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
+  //ellipse(scaledX, scaledY, 20, 20); //draw user cursor as a circle with a diameter of 20
   
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
   
   //check to see if mouse cursor is inside button 
-  if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
+  if ((scaledX > bounds.x && scaledX < bounds.x + bounds.width) && (scaledY > bounds.y && scaledY < bounds.y + bounds.height)) // test to see if hit was within bounds
   {
-    fill(0, 255, 255); // Make cursor Cyan
-    ellipse(mouseX, mouseY, 10, 10); //draw user cursor as a circle with a diameter of 10
+    stroke(10, 255, 10);
+    fill(10, 255, 10); // Make cursor Bright green
+    ellipse(scaledX, scaledY, 10, 10); //draw user cursor as a circle with a diameter of 10
+    stroke(0, 0, 0);
   } 
   else
   {
-    fill(0, 255, 0); // Make cursor Cyan
-    ellipse(mouseX, mouseY, 22, 22); //draw user cursor as a circle with a diameter of 20
+    stroke(10, 255, 10);
+    fill(10, 255, 10); // Make cursor Bright green
+    ellipse(scaledX, scaledY, 22, 22); //draw user cursor as a circle with a diameter of 20
+    stroke(0, 0, 0);
     
+    // When the cursor is outside the square add a stroke
     stroke(255, 255, 255);
-    strokeWeight(2);
-    line(mouseX, mouseY, bounds.x + buttonSize/2, bounds.y + buttonSize/2);
+    strokeWeight(3);
+    line(scaledX, scaledY, bounds.x + buttonSize/2, bounds.y + buttonSize/2);
     stroke(0, 0, 0);
   }
   
@@ -122,8 +133,10 @@ void mousePressed() // test to see if hit was in target!
 
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
 
+  float scaledX = mouseX * sensitivity;
+  float scaledY = mouseY * sensitivity;
  //check to see if mouse cursor is inside button 
-  if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
+  if ((scaledX > bounds.x && scaledX < bounds.x + bounds.width) && (scaledY > bounds.y && scaledY < bounds.y + bounds.height)) // test to see if hit was within bounds
   {
     System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
     hits++; 
@@ -138,6 +151,7 @@ void mousePressed() // test to see if hit was in target!
 
   //in this example code, we move the mouse back to the middle
   //robot.mouseMove(width/2, (height)/2); //on click, move cursor to roughly center of window!
+  
 }  
 
 //probably shouldn't have to edit this method
@@ -188,4 +202,6 @@ void keyPressed()
   //can use the keyboard if you wish
   //https://processing.org/reference/keyTyped_.html
   //https://processing.org/reference/keyCode.html
+  
+  
 }

@@ -27,8 +27,8 @@
 
 
 ### Prototype 2 (New ideas):
-1. Increase the total screen space with workspace in center.
-2. 
-3. 
+1. Make workspace full screen.
+2. Decrease the sensitivity of mouse.
+
 
 
