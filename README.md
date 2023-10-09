@@ -1,7 +1,7 @@
 ## COSC 559: Human Computer Interaction
 ### Bakeoff 1: Pointing
 - Developed in [Processing](https://processing.org)
-- [Video explanation]()
+- [Video explanation](https://youtu.be/waBh-pU7qs8)
 - [Presentation Slides](https://nbviewer.org/github/yashraj-28/HCI-Prototyping/blob/main/slides.pdf)
   
 ### Initial Ideas:
