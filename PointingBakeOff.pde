@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
 import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
@@ -26,14 +29,14 @@ int lastClickTime = 0;
 int startClickTime = 0;
 int previousClickTime = 0;
 int hit_miss = 0;
-int numRepeats = 20; //sets the number of times each button repeats in the test
+int numRepeats = 1; //sets the number of times each button repeats in the test
 
 int participantID = -1; // Initialize participant ID to -1
 
 void setup()
 {
-  fullScreen();
-  size(700, 700); // set the size of the window
+ // fullScreen();
+  size(1200, 1200); // set the size of the window
   //noCursor(); //hides the system cursor if you want
   noStroke(); //turn off all strokes, we're just using fills here (can change this if you want)
   textFont(createFont("Arial", 16)); //sets the font to Arial size 16
@@ -57,7 +60,7 @@ void setup()
       trials.add(i);
 
   Collections.shuffle(trials); // randomize the order of the buttons
-  System.out.println("trial order: " + trials);
+  //System.out.println("trial order: " + trials);
   
   surface.setLocation(0,0);// put window in top left corner of screen (doesn't always work)
   
@@ -156,7 +159,7 @@ void mousePressed() // test to see if hit was in target!
   {
     finishTime = millis();
     //write to terminal some output. Useful for debugging too.
-    println("we're done!");
+    //println("we're done!");
   }
 
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
@@ -164,13 +167,13 @@ void mousePressed() // test to see if hit was in target!
  //check to see if mouse cursor is inside button 
   if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
   {
-    System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
+   // System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
     hit_miss = 1;
     hits++; 
   } 
   else
   {
-    System.out.println("MISSED! " + trialNum + " " + (millis() - startTime)); // fail
+    //System.out.println("MISSED! " + trialNum + " " + (millis() - startTime)); // fail
     misses++;
     hit_miss = 0;
   }
@@ -188,6 +191,11 @@ void mousePressed() // test to see if hit was in target!
   }
   
   previousClickTime = millis(); // Update the time of the previous click
+  
+  Rectangle currentTargetBounds = getButtonLocation(trials.get(trialNum));
+  displayTextAndWriteToFile(trialNum + "," + participantID + "," + initialmouseX + "," + initialmouseY + "," + (currentTargetBounds.x + currentTargetBounds.width/2) + "," + 
+   (currentTargetBounds.y + currentTargetBounds.height/2) + "," + currentTargetBounds.width + "," + 
+    nf((float)lastClickTime/1000) + "," +  hit_miss, 0.25*width, 0.5*height);
 }  
 
 //probably shouldn't have to edit this method
@@ -217,6 +225,19 @@ void drawButton(int i)
   }
 
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+}
+
+void displayTextAndWriteToFile(String txt, float x, float y) {
+  fill(255);
+  text(txt, x, y); // Display the text on screen
+  println(txt);
+
+  try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt", true))) {
+    writer.write(txt); // Write the text to the file
+    writer.newLine();  // Add a new line for the next text
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
 }
 
 
