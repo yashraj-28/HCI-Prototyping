@@ -193,9 +193,9 @@ void mousePressed() // test to see if hit was in target!
   previousClickTime = millis(); // Update the time of the previous click
   
   Rectangle currentTargetBounds = getButtonLocation(trials.get(trialNum));
-  displayTextAndWriteToFile(trialNum + "," + participantID + "," + initialmouseX + "," + initialmouseY + "," + (currentTargetBounds.x + currentTargetBounds.width/2) + "," + 
+  System.out.println(trialNum + "," + participantID + "," + initialmouseX + "," + initialmouseY + "," + (currentTargetBounds.x + currentTargetBounds.width/2) + "," + 
    (currentTargetBounds.y + currentTargetBounds.height/2) + "," + currentTargetBounds.width + "," + 
-    nf((float)lastClickTime/1000) + "," +  hit_miss, 0.25*width, 0.5*height);
+    nf((float)lastClickTime/1000) + "," +  hit_miss);
 }  
 
 //probably shouldn't have to edit this method
@@ -227,18 +227,18 @@ void drawButton(int i)
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
 }
 
-void displayTextAndWriteToFile(String txt, float x, float y) {
-  fill(255);
-  text(txt, x, y); // Display the text on screen
-  println(txt);
+//void displayTextAndWriteToFile(String txt, float x, float y) {
+//  fill(255);
+//  text(txt, x, y); // Display the text on screen
+//  println(txt);
 
-  try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt", true))) {
-    writer.write(txt); // Write the text to the file
-    writer.newLine();  // Add a new line for the next text
-  } catch (IOException e) {
-    e.printStackTrace();
-  }
-}
+//  try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt", true))) {
+//    writer.write(txt); // Write the text to the file
+//    writer.newLine();  // Add a new line for the next text
+//  } catch (IOException e) {
+//    e.printStackTrace();
+//  }
+//}
 
 
 void mouseMoved()
