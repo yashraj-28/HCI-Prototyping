@@ -18,8 +18,14 @@ int hits = 0; //number of successful clicks
 int misses = 0; //number of missed clicks
 Robot robot; //initialized in setup 
 float t = 0;
+int initialmouseX = 0;
+int initialmouseY = 0;
 
-int numRepeats = 1; //sets the number of times each button repeats in the test
+int lastClickTime = 0;
+int startClickTime = 0;
+int previousClickTime = 0;
+int hit_miss = 0;
+int numRepeats = 20; //sets the number of times each button repeats in the test
 
 void setup()
 {
@@ -56,8 +62,12 @@ void setup()
 
 void draw()
 {
+  startClickTime = millis();
   background(0); //set background to black
   noCursor();
+  
+  fill(255); //set text color to white
+  text("Initial Cursor Position: X=" + initialmouseX + ", Y=" + initialmouseY, 0.25*width, 0.20*height);
   
   if (trialNum >= trials.size()) //check to see if test is over
   {
@@ -74,7 +84,15 @@ void draw()
     text("Average time for each button + penalty: " + nf(((timeTaken)/(float)(hits+misses) + penalty),0,3) + " sec", width / 2, height / 2 + 140);
     return; //return, nothing else to do now test is over
   }
-
+  
+  // Display current target position
+  Rectangle currentTargetBounds = getButtonLocation(trials.get(trialNum));
+  fill(255); //set text color to white
+  text("Current Target Position: X=" + (currentTargetBounds.x + currentTargetBounds.width/2) + ", Y=" + (currentTargetBounds.y + currentTargetBounds.height/2), 0.25*width, 0.25*height);
+  text("Target Width=" + currentTargetBounds.width, 0.25*width, 0.30*height);
+  text("Time taken to click the previous button: " + nf((float)lastClickTime/1000, 0, 2) + " sec", 0.25*width, 0.35*height);
+  text("Hit/ Miss on Previous click:" + hit_miss, 0.20*width, 0.40*height);
+  
   fill(255); //set fill color to white
   text((trialNum + 1) + " of " + trials.size(), 40, 20); //display what trial the user is on
 
@@ -132,18 +150,29 @@ void mousePressed() // test to see if hit was in target!
   if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
   {
     System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
+    hit_miss = 1;
     hits++; 
   } 
   else
   {
     System.out.println("MISSED! " + trialNum + " " + (millis() - startTime)); // fail
     misses++;
+    hit_miss = 0;
   }
 
   trialNum++; //Increment trial number
 
   //in this example code, we move the mouse back to the middle
   //robot.mouseMove(width/2, (height)/2); //on click, move cursor to roughly center of window!
+    
+  initialmouseX = mouseX;
+  initialmouseY = mouseY;
+   
+  if (previousClickTime != 0) { // Check to ensure this is not the first click
+    lastClickTime = millis() - previousClickTime; // Calculate time taken since the previous click
+  }
+  
+  previousClickTime = millis(); // Update the time of the previous click
 }  
 
 //probably shouldn't have to edit this method
