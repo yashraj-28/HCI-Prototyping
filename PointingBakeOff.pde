@@ -4,6 +4,7 @@ import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
+import javax.swing.JOptionPane;
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
@@ -26,6 +27,8 @@ int startClickTime = 0;
 int previousClickTime = 0;
 int hit_miss = 0;
 int numRepeats = 20; //sets the number of times each button repeats in the test
+
+int participantID = -1; // Initialize participant ID to -1
 
 void setup()
 {
@@ -57,6 +60,17 @@ void setup()
   System.out.println("trial order: " + trials);
   
   surface.setLocation(0,0);// put window in top left corner of screen (doesn't always work)
+  
+  
+  // Prompt the user for their participant ID
+  String inputID = JOptionPane.showInputDialog("Enter your participant ID (a unique number):");
+  if (inputID != null && !inputID.isEmpty()) {
+    participantID = int(inputID);
+    //print(participantID);
+  } else {
+    // Handle the case where the user didn't enter an ID (optional)
+    // You can display an error message, exit the program, or take other actions.
+  }
 }
 
 
@@ -92,10 +106,11 @@ void draw()
   text("Target Width=" + currentTargetBounds.width, 0.25*width, 0.30*height);
   text("Time taken to click the previous button: " + nf((float)lastClickTime/1000, 0, 2) + " sec", 0.25*width, 0.35*height);
   text("Hit/ Miss on Previous click:" + hit_miss, 0.20*width, 0.40*height);
+  text("Participant ID" + participantID, 0.20*width, 0.15*height);
   
   fill(255); //set fill color to white
   text((trialNum + 1) + " of " + trials.size(), 40, 20); //display what trial the user is on
-
+  
   for (int i = 0; i < 16; i++)// for all button
     drawButton(i); //draw button
 
