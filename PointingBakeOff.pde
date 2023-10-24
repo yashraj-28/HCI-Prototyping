@@ -29,7 +29,7 @@ int lastClickTime = 0;
 int startClickTime = 0;
 int previousClickTime = 0;
 int hit_miss = 0;
-int numRepeats = 1; //sets the number of times each button repeats in the test
+int numRepeats = 25; //sets the number of times each button repeats in the test
 
 int participantID = -1; // Initialize participant ID to -1
 
